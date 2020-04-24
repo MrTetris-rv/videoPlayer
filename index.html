@@ -194,7 +194,42 @@
 
 
 
+    var flag;
+    document.addEventListener('keydown', function (event) {
 
+      if (event.keyCode == 32 && flag && mmedia.paused) {
+
+        mmedia.play();
+        play.innerHTML = j;
+        darkplayer.style.cssText = `
+       display: none;
+        `;
+        playImg.style.cssText = `
+        display: none;
+        `;
+        clearInterval(loop);
+        flag = false;
+      }
+      if (event.keyCode == 32 && flag && !mmedia.paused && !mmedia.ended) {
+
+        console.log(event);
+        mmedia.pause();
+        play.innerHTML = k;
+        darkplayer.style.cssText = `
+display: block;
+`;
+        playImg.style.cssText = `
+display: block;
+`;
+        clearInterval(loop);
+        flag = false;
+      }
+
+    });
+    document.addEventListener('keyup', function (event) {
+      if (event.keyCode == 32)
+        flag = true;
+    });
 
     function push() {
       if (!mmedia.paused && !mmedia.ended) {
@@ -312,46 +347,6 @@
     function level() {
       mmedia.volume = volume.value;
     }
-
-    var flag;
-    document.addEventListener('keydown', function (event) {
-
-      console.log(mmedia.paused);
-
-      if (event.keyCode == 32 && flag && mmedia.paused) {
-
-        console.log(event);
-        mmedia.play();
-        play.innerHTML = j;
-        darkplayer.style.cssText = `
-       display: none;
-        `;
-        playImg.style.cssText = `
-        display: none;
-        `;
-        clearInterval(loop);
-        flag = false;
-      }
-      if (event.keyCode == 32 && flag && !mmedia.paused && !mmedia.ended) {
-
-        console.log(event);
-        mmedia.pause();
-        play.innerHTML = k;
-        darkplayer.style.cssText = `
-display: block;
-`;
-        playImg.style.cssText = `
-display: block;
-`;
-        clearInterval(loop);
-        flag = false;
-      }
-
-    });
-    document.addEventListener('keyup', function (event) {
-      if (event.keyCode == 32)
-        flag = true;
-    });
   </script>
 
 
