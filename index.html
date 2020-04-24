@@ -192,8 +192,6 @@
     }
     addEventListener('load', initiate)
 
-
-
     var flag;
     document.addEventListener('keydown', function (event) {
 
@@ -207,7 +205,7 @@
         playImg.style.cssText = `
         display: none;
         `;
-        clearInterval(loop);
+        loop = setInterval(status, 1000);
         flag = false;
       }
       if (event.keyCode == 32 && flag && !mmedia.paused && !mmedia.ended) {
