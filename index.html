@@ -8,6 +8,21 @@
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      background-image: url("back.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
     video {
       width: 720px;
     }
@@ -214,11 +229,11 @@
         mmedia.pause();
         play.innerHTML = k;
         darkplayer.style.cssText = `
-display: block;
-`;
+        display: block;
+        `;
         playImg.style.cssText = `
-display: block;
-`;
+          display: block;
+          `;
         clearInterval(loop);
         flag = false;
       }
