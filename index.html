@@ -11,15 +11,14 @@
     * {
       padding: 0;
       margin: 0;
-      box-sizing: border-box;
+
     }
 
     body {
-      width: 100%;
-      /* height: 100%; */
       background-image: url("back.png");
       background-repeat: no-repeat;
       background-size: cover;
+      background-attachment: fixed;
     }
 
     video {
@@ -27,12 +26,14 @@
     }
 
     section {
-      padding: 0 30px 30px 30px;
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
     }
 
     #player {
       width: 720px;
-      margin: 120px auto;
     }
 
     #play,
@@ -54,7 +55,7 @@
       align-items: center;
       padding: 5px;
       background: black;
-      width: 720px;
+
     }
 
     input[type="button"]:hover {
@@ -71,6 +72,7 @@
       height: 6px;
       margin: 2px 5px;
       background: grey;
+
       cursor: pointer;
     }
 
@@ -90,6 +92,13 @@
       background: transparent;
       border-color: transparent;
       color: transparent;
+    }
+
+    .mains {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     /* Специальные правила для браузеров на движках WebKit/Blink */
@@ -147,17 +156,92 @@
       opacity: 0.4;
       cursor: pointer;
     }
+
+    #vi1,
+    #vi2,
+    #vi3,
+    #vi4,
+    #vi5 {
+      width: 150px;
+      height: 150px;
+      background: #361010;
+      color: white;
+      padding: 10px;
+      margin-bottom: 30px;
+      margin-left: 15px;
+      text-transform: uppercase;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    #vi1 p,
+    #vi2 p,
+    #vi3 p,
+    #vi4 p,
+    #vi5 p {
+      padding-top: 65px;
+    }
+
+
+
+    #vi1:hover,
+    #vi2:hover,
+    #vi3:hover,
+    #vi4:hover,
+    #vi5:hover {
+      animation: 0.5s a1;
+      cursor: pointer;
+      background: #103624;
+      color: white;
+    }
+
+
+
+    @keyframes a1 {
+      0% {
+        background: #361010;
+      }
+
+      50% {
+        background: #331036;
+      }
+
+      70% {
+        background: #101736;
+      }
+
+      100% {
+        background: #103624;
+      }
+    }
+
+    #vids {
+      margin-left: 30px;
+      margin-top: 70px;
+
+      width: 200px;
+      height: 600px;
+      overflow: hidden;
+    }
+
+    .vi {
+      width: 200px;
+      height: 100%;
+      padding: 0 50px 0 0;
+      overflow: auto;
+    }
   </style>
 </head>
 
 <body>
+
   <section id="player">
     <div id="darkplayer"></div>
     <img src="play.png" alt="play" id="playImg" onclick="videoImg()">
-    <video id="media" onclick="video()">
-      <source src="video.mp4" type="video/mp4">
-      <source src="video.webm" type="video/webm">
-      <source src="video.ogv" type="video/ogg">
+    <video id="media" onclick="video()" src="v1.webm">
+
+
 
       <p>Видео не поддерживается. <a href="video.mp4">Скачать</a> </p>
     </video>
@@ -173,12 +257,31 @@
       </div>
 
       <div id="control">
-        <input type="range" id="volume" min="0" max="1" step="0.05" value="1">
+        <input type="range" id="volume" min="0" max="1" step="0.05" value="0.2">
       </div>
 
     </nav>
 
   </section>
+  <div id="vids">
+    <div class="vi">
+      <div id="vi1" onclick="vi1()">
+        <p>Видео 1</p>
+      </div>
+      <div id="vi2" onclick="vi2()">
+        <p>Видео 2</p>
+      </div>
+      <div id="vi3" onclick="vi3()">
+        <p>Видео 3</p>
+      </div>
+      <div id="vi4" onclick="vi4()">
+        <p>Видео 4</p>
+      </div>
+      <div id="vi5" onclick="vi5()">
+        <p>Видео 5</p>
+      </div>
+    </div>
+  </div>
 
   <script>
     let mmedia, play, bar, progress, mute, volume, loop;
@@ -325,7 +428,7 @@
     function status() {
 
       if (!mmedia.ended) {
-        let size = mmedia.currentTime * 500 / mmedia.duration;
+        let size = parseInt(mmedia.currentTime * 400 / mmedia.duration);
         progress.style.width = `${size}px`;
       } else {
         progress.style.width = 0;
@@ -336,9 +439,9 @@
     }
 
     function move(e) {
-      if (!mmedia.ended) {
+      if (!mmedia.ended && !mmedia.paused) {
         let mouseX = e.pageX - bar.offsetLeft;
-        let newtime = mouseX * mmedia.duration / 500;
+        let newtime = mouseX * mmedia.duration / 400;
         mmedia.currentTime = newtime;
         progress.style.width = `${mouseX}px`;
       }
@@ -359,7 +462,7 @@
       mmedia.volume = volume.value;
     }
   </script>
-
+  <script src="script.js"></script>
 
 </body>
 
