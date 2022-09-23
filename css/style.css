@@ -4,7 +4,7 @@
 }
 
 body {
-  background-image: url("back.png");
+  background-image: url("../img/back.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -55,10 +55,6 @@ nav {
   align-items: center;
   padding: 5px;
   background: black;
-}
-
-input[type="button"]:hover {
-  color: #00adef;
 }
 
 .buttons {

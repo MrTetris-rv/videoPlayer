@@ -109,22 +109,22 @@ wrapperVideos.addEventListener('click', (e) => {
   if (e.target && !e.target.classList.contains('wrapper-videos')) {
     switch (e.target.className) {
       case 'vi1':
-        chooseVideo('v1.mp4');
+        chooseVideo('video/v1.mp4');
         break;
       case 'vi2':
-        chooseVideo('hi.mp4');
+        chooseVideo('video/hi.mp4');
         break;
       case 'vi3':
-        chooseVideo('video.mp4');
+        chooseVideo('video/video.mp4');
         break;
       case 'vi4':
-        chooseVideo('v2.mp4');
+        chooseVideo('video/v2.mp4');
         break;
       case 'vi5':
-        chooseVideo('wt.mp4');
+        chooseVideo('video/wt.mp4');
         break;
       default:
-        chooseVideo('v1.mp4');
+        chooseVideo('video/v1.mp4');
         break;
     }
   }
@@ -132,11 +132,11 @@ wrapperVideos.addEventListener('click', (e) => {
 
 function chooseVideo(numVideo) {
   media.src = `${numVideo}`;
-  pauseVideo();
   resetOptions();
 }
 
 function resetOptions() {
+  pauseVideo();
   progress.style.width = 0;
   media.muted = false;
   mute.innerHTML = changeVolume;
